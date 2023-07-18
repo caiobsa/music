@@ -35,32 +35,16 @@ def main():
 
     st.markdown("""
     Este aplicativo permite que você calcule o campo harmônico maior ou menor de uma nota musical.
-    Simplesmente clique em uma nota e escolha se você quer calcular o campo harmônico maior ou menor.
+    Simplesmente selecione uma nota e escolha se você quer calcular o campo harmônico maior ou menor.
     """)
 
-    notas = ["C", "D", "E", "F", "G", "A", "B"]
-    tipos = ["Maior", "Menor"]
+    nota = st.selectbox("Escolha uma nota musical:", ["C", "D", "E", "F", "G", "A", "B"])
+    tipo = st.selectbox("Escolha o tipo de campo harmônico:", ["maior", "menor"])
 
-    nota_selecionada = st.session_state.get('nota_selecionada', None)
-    tipo_selecionado = st.session_state.get('tipo_selecionado', None)
-
-    if nota_selecionada is None:
-        st.write('Escolha uma nota:')
-        for nota in notas:
-            if st.button(nota):
-                st.session_state['nota_selecionada'] = nota
-                break
-
-    elif tipo_selecionado is None:
-        st.write('Escolha um tipo:')
-        for tipo in tipos:
-            if st.button(tipo):
-                st.session_state['tipo_selecionado'] = tipo.lower()
-                break
-
-    else:
+    if st.button('Calcular'):
         try:
-            campo_harmonico = get_campo_harmonico(nota_selecionada, tipo_selecionado)
+            campo_harmonico = get_campo_harmonico(nota, tipo)
+
             cols = st.columns(7)
             for i, nota in enumerate(campo_harmonico):
                 cols[i].markdown(f"## {nota}", unsafe_allow_html=True)
@@ -69,3 +53,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
