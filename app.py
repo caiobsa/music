@@ -41,16 +41,14 @@ def main():
     nota = st.selectbox("Escolha uma nota musical:", ["C", "D", "E", "F", "G", "A", "B"])
     tipo = st.selectbox("Escolha o tipo de campo harmônico:", ["maior", "menor"])
 
-    if st.button('Calcular'):
-        try:
-            campo_harmonico = get_campo_harmonico(nota, tipo)
+    try:
+        campo_harmonico = get_campo_harmonico(nota, tipo)
 
-            cols = st.columns(7)
-            for i, nota in enumerate(campo_harmonico):
-                cols[i].markdown(f"## {nota}", unsafe_allow_html=True)
-        except KeyError:
-            st.write("Ocorreu um erro ao calcular o campo harmônico. Por favor, tente novamente.")
+        cols = st.columns(7)
+        for i, nota in enumerate(campo_harmonico):
+            cols[i].markdown(f"## {nota}", unsafe_allow_html=True)
+    except KeyError:
+        st.write("Ocorreu um erro ao calcular o campo harmônico. Por favor, tente novamente.")
 
 if __name__ == "__main__":
     main()
-
