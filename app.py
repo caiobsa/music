@@ -33,18 +33,21 @@ def get_campo_harmonico(nota, tipo):
 def main():
     st.title('Campo Harmônico')
 
-    nota = st.text_input("Digite uma nota musical (C, D, E, F, G, A, B):")
+    st.markdown("""
+    Este aplicativo permite que você calcule o campo harmônico maior ou menor de uma nota musical.
+    Simplesmente selecione uma nota e escolha se você quer calcular o campo harmônico maior ou menor.
+    """)
+
+    nota = st.selectbox("Escolha uma nota musical:", ["C", "D", "E", "F", "G", "A", "B"])
+    tipo = st.selectbox("Escolha o tipo de campo harmônico:", ["maior", "menor"])
 
     if st.button('Calcular'):
         try:
-            campo_maior = get_campo_harmonico(nota.upper(), "maior")
-            campo_menor = get_campo_harmonico(nota.upper(), "menor")
+            campo_harmonico = get_campo_harmonico(nota, tipo)
 
-            st.write(f"Campo harmônico maior de {nota}: {', '.join(campo_maior)}")
-            st.write(f"Campo harmônico menor de {nota}: {', '.join(campo_menor)}")
+            st.write(f"Campo harmônico {tipo} de {nota}: {', '.join(campo_harmonico)}")
         except KeyError:
-            st.write("Por favor, insira uma nota válida (C, D, E, F, G, A, B).")
+            st.write("Ocorreu um erro ao calcular o campo harmônico. Por favor, tente novamente.")
 
 if __name__ == "__main__":
     main()
-
