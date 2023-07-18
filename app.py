@@ -21,34 +21,54 @@ CAMPOS_HARMONICOS_MENOR = {
     "B": ["B", "C#", "D", "E", "F#", "G", "A"],
 }
 
-def get_campo_harmonico(nota, tipo):
-    """ Retorna o campo harmônico maior ou menor de uma nota musical """
+CAMPOS_HARMONICOS_SETIMA_MAIOR = {
+    "C": ["C", "D", "E", "F", "G", "A", "B", "C"],
+    "D": ["D", "E", "F#", "G", "A", "B", "C#", "D"],
+    "E": ["E", "F#", "G#", "A", "B", "C#", "D#", "E"],
+    "F": ["F", "G", "A", "A#", "C", "D", "E", "F"],
+    "G": ["G", "A", "B", "C", "D", "E", "F#", "G"],
+    "A": ["A", "B", "C#", "D", "E", "F#", "G#", "A"],
+    "B": ["B", "C#", "D#", "E", "F#", "G#", "A#", "B"],
+}
+
+CAMPOS_HARMONICOS_SETIMA_MENOR = {
+    "C": ["C", "D", "D#", "F", "G", "G#", "A#", "C"],
+    "D": ["D", "E", "F", "G", "A", "A#", "C", "D"],
+    "E": ["E", "F#", "G", "A", "B", "C", "D", "E"],
+    "F": ["F", "G", "G#", "A#", "C", "C#", "D#", "F"],
+    "G": ["G", "A", "A#", "C", "D", "D#", "F", "G"],
+    "A": ["A", "B", "C", "D", "E", "F", "G", "A"],
+    "B": ["B", "C#", "D", "E", "F#", "G", "A", "B"],
+}
+
+ESCALA_PENTATONICA_MAIOR = {
+    "C": ["C", "D", "E", "G", "A"],
+    "D": ["D", "E", "F#", "A", "B"],
+    "E": ["E", "F#", "G#", "B", "C#"],
+    "F": ["F", "G", "A", "C", "D"],
+    "G": ["G", "A", "B", "D", "E"],
+    "A": ["A", "B", "C#", "E", "F#"],
+    "B": ["B", "C#", "D#", "F#", "G#"],
+}
+
+ESCALA_PENTATONICA_MENOR = {
+    "C": ["C", "D#", "F", "G", "A#"],
+    "D": ["D", "F", "G", "A", "C"],
+    "E": ["E", "G", "A", "B", "D"],
+    "F": ["F", "G#", "A#", "C", "D#"],
+    "G": ["G", "A#", "C", "D", "F"],
+    "A": ["A", "C", "D", "E", "G"],
+    "B": ["B", "D", "E", "F#", "A"],
+}
+
+def get_escala(nota, tipo):
+    """ Retorna a escala pentatônica maior ou menor de uma nota musical """
     if tipo == "maior":
-        return CAMPOS_HARMONICOS_MAIOR[nota]
+        return ESCALA_PENTATONICA_MAIOR[nota]
     elif tipo == "menor":
-        return CAMPOS_HARMONICOS_MENOR[nota]
+        return ESCALA_PENTATONICA_MENOR[nota]
     else:
         return None
 
-def main():
-    st.title('Campo Harmônico')
-
-    st.markdown("""
-    Este aplicativo permite que você calcule o campo harmônico maior ou menor de uma nota musical.
-    Simplesmente selecione uma nota e escolha se você quer calcular o campo harmônico maior ou menor.
-    """)
-
-    nota = st.selectbox("Escolha uma nota musical:", ["C", "D", "E", "F", "G", "A", "B"])
-    tipo = st.selectbox("Escolha o tipo de campo harmônico:", ["maior", "menor"])
-
-    try:
-        campo_harmonico = get_campo_harmonico(nota, tipo)
-
-        cols = st.columns(7)
-        for i, nota in enumerate(campo_harmonico):
-            cols[i].markdown(f"## {nota}", unsafe_allow_html=True)
-    except KeyError:
-        st.write("Ocorreu um erro ao calcular o campo harmônico. Por favor, tente novamente.")
-
-if __name__ == "__main__":
-    main()
+def get_campo_harmonico(nota, tipo):
+    """
