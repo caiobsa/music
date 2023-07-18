@@ -35,16 +35,56 @@ def main():
 
     st.markdown("""
     Este aplicativo permite que você calcule o campo harmônico maior ou menor de uma nota musical.
-    Simplesmente selecione uma nota e escolha se você quer calcular o campo harmônico maior ou menor.
+    Simplesmente clique em uma nota e escolha se você quer calcular o campo harmônico maior ou menor.
     """)
 
-    nota = st.selectbox("Escolha uma nota musical:", ["C", "D", "E", "F", "G", "A", "B"])
-    tipo = st.selectbox("Escolha o tipo de campo harmônico:", ["maior", "menor"])
+    nota = st.empty()
+    tipo = st.empty()
+    notas = ["C", "D", "E", "F", "G", "A", "B"]
+    tipos = ["maior", "menor"]
 
-    if st.button('Calcular'):
+    nota_selecionada = st.session_state.get('nota_selecionada', None)
+    tipo_selecionado = st.session_state.get('tipo_selecionado', None)
+
+    if nota.button("C"):
+        nota_selecionada = "C"
+        st.session_state['nota_selecionada'] = nota_selecionada
+
+    elif nota.button("D"):
+        nota_selecionada = "D"
+        st.session_state['nota_selecionada'] = nota_selecionada
+
+    elif nota.button("E"):
+        nota_selecionada = "E"
+        st.session_state['nota_selecionada'] = nota_selecionada
+
+    elif nota.button("F"):
+        nota_selecionada = "F"
+        st.session_state['nota_selecionada'] = nota_selecionada
+
+    elif nota.button("G"):
+        nota_selecionada = "G"
+        st.session_state['nota_selecionada'] = nota_selecionada
+
+    elif nota.button("A"):
+        nota_selecionada = "A"
+        st.session_state['nota_selecionada'] = nota_selecionada
+
+    elif nota.button("B"):
+        nota_selecionada = "B"
+        st.session_state['nota_selecionada'] = nota_selecionada
+
+    if tipo.button("Maior"):
+        tipo_selecionado = "maior"
+        st.session_state['tipo_selecionado'] = tipo_selecionado
+
+    elif tipo.button("Menor"):
+        tipo_selecionado = "menor"
+        st.session_state['tipo_selecionado'] = tipo_selecionado
+
+    if nota_selecionada and tipo_selecionado:
         try:
-            campo_harmonico = get_campo_harmonico(nota, tipo)
-
+            campo_harmonico = get_campo_harmonico(nota_selecionada, tipo_selecionado)
             cols = st.columns(7)
             for i, nota in enumerate(campo_harmonico):
                 cols[i].markdown(f"## {nota}", unsafe_allow_html=True)
