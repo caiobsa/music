@@ -45,7 +45,7 @@ def main():
         try:
             campo_harmonico = get_campo_harmonico(nota, tipo)
 
-            cols = st.beta_columns(7)
+            cols = st.columns(7)
             for i, nota in enumerate(campo_harmonico):
                 cols[i].markdown(f"## {nota}", unsafe_allow_html=True)
         except KeyError:
