@@ -45,7 +45,9 @@ def main():
         try:
             campo_harmonico = get_campo_harmonico(nota, tipo)
 
-            st.write(f"Campo harmônico {tipo} de {nota}: {', '.join(campo_harmonico)}")
+            cols = st.beta_columns(7)
+            for i, nota in enumerate(campo_harmonico):
+                cols[i].markdown(f"## {nota}", unsafe_allow_html=True)
         except KeyError:
             st.write("Ocorreu um erro ao calcular o campo harmônico. Por favor, tente novamente.")
 
