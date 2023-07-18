@@ -38,51 +38,27 @@ def main():
     Simplesmente clique em uma nota e escolha se você quer calcular o campo harmônico maior ou menor.
     """)
 
-    nota = st.empty()
-    tipo = st.empty()
     notas = ["C", "D", "E", "F", "G", "A", "B"]
-    tipos = ["maior", "menor"]
+    tipos = ["Maior", "Menor"]
 
     nota_selecionada = st.session_state.get('nota_selecionada', None)
     tipo_selecionado = st.session_state.get('tipo_selecionado', None)
 
-    if nota.button("C"):
-        nota_selecionada = "C"
-        st.session_state['nota_selecionada'] = nota_selecionada
+    if nota_selecionada is None:
+        st.write('Escolha uma nota:')
+        for nota in notas:
+            if st.button(nota):
+                st.session_state['nota_selecionada'] = nota
+                break
 
-    elif nota.button("D"):
-        nota_selecionada = "D"
-        st.session_state['nota_selecionada'] = nota_selecionada
+    elif tipo_selecionado is None:
+        st.write('Escolha um tipo:')
+        for tipo in tipos:
+            if st.button(tipo):
+                st.session_state['tipo_selecionado'] = tipo.lower()
+                break
 
-    elif nota.button("E"):
-        nota_selecionada = "E"
-        st.session_state['nota_selecionada'] = nota_selecionada
-
-    elif nota.button("F"):
-        nota_selecionada = "F"
-        st.session_state['nota_selecionada'] = nota_selecionada
-
-    elif nota.button("G"):
-        nota_selecionada = "G"
-        st.session_state['nota_selecionada'] = nota_selecionada
-
-    elif nota.button("A"):
-        nota_selecionada = "A"
-        st.session_state['nota_selecionada'] = nota_selecionada
-
-    elif nota.button("B"):
-        nota_selecionada = "B"
-        st.session_state['nota_selecionada'] = nota_selecionada
-
-    if tipo.button("Maior"):
-        tipo_selecionado = "maior"
-        st.session_state['tipo_selecionado'] = tipo_selecionado
-
-    elif tipo.button("Menor"):
-        tipo_selecionado = "menor"
-        st.session_state['tipo_selecionado'] = tipo_selecionado
-
-    if nota_selecionada and tipo_selecionado:
+    else:
         try:
             campo_harmonico = get_campo_harmonico(nota_selecionada, tipo_selecionado)
             cols = st.columns(7)
